@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 718cbabccfec0c8409555a4a5206c325
+guid: ef43678bf998be54d813c38563ad2a22
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -7,20 +7,14 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Plug
-    second: {fileID: -8896051167825165466, guid: 2c165fec3fc49cc4f98b0269a63bbb2c,
+      name: Black
+    second: {fileID: -4246479402191905792, guid: 79a60d1043152b642b6ca5f0bc7fe8c0,
       type: 3}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Taps
-    second: {fileID: 7897563222206442670, guid: 79a60d1043152b642b6ca5f0bc7fe8c0,
-      type: 3}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Tub
-    second: {fileID: 7835167751351153289, guid: 79a60d1043152b642b6ca5f0bc7fe8c0,
+      name: Wooden texture
+    second: {fileID: -5605289326131794027, guid: 79a60d1043152b642b6ca5f0bc7fe8c0,
       type: 3}
   materials:
     materialImportMode: 2
