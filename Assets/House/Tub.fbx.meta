@@ -14,19 +14,18 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Taps
-    second: {fileID: 7897563222206442670, guid: 79a60d1043152b642b6ca5f0bc7fe8c0,
+    second: {fileID: -8896051167825165466, guid: 2c165fec3fc49cc4f98b0269a63bbb2c,
       type: 3}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Tub
-    second: {fileID: 7835167751351153289, guid: 79a60d1043152b642b6ca5f0bc7fe8c0,
-      type: 3}
+    second: {fileID: 2100000, guid: ec07f05352b05cb43b1fcef2cde03163, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
     materialSearch: 1
-    materialLocation: 0
+    materialLocation: 1
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0

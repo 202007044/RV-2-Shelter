@@ -8,19 +8,17 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Black
-    second: {fileID: -4246479402191905792, guid: 79a60d1043152b642b6ca5f0bc7fe8c0,
-      type: 3}
+    second: {fileID: 2100000, guid: 3a9c259256e9af14cbb4a028fd09ef67, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Wooden texture
-    second: {fileID: -5605289326131794027, guid: 79a60d1043152b642b6ca5f0bc7fe8c0,
-      type: 3}
+    second: {fileID: 2100000, guid: 73ad7e67fd0e1a34faf1da67a935679a, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
     materialSearch: 1
-    materialLocation: 0
+    materialLocation: 1
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
