@@ -53,7 +53,7 @@ public class DogController : MonoBehaviour
         {
             // Randomly pick the next state
             DogState nextState = (DogState)Random.Range(1, 5);
-            //Debug.Log("Dog State: " + nextState);
+            Debug.Log("Dog State: " + gameObject.name + " " + nextState);
             ChangeState(nextState);
 
             // Set a new random interval for the next state change
@@ -65,7 +65,7 @@ public class DogController : MonoBehaviour
         {
             if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
             {
-                //Debug.Log("Arrived at position: Stop walking");
+                Debug.Log(gameObject.name + " arrived at position: Stop walking");
 
                 // Stop walking and switch to idle
                 ChangeState(DogState.Idle);
