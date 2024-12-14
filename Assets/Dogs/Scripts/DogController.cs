@@ -22,6 +22,8 @@ public class DogController : MonoBehaviour
     private float stateTimer;          // Timer to track when to change state
     private DogState currentState;     // Current behavior state
 
+    private AudioSource audioSource;
+
     private enum DogState
     {
         Idle,
@@ -34,6 +36,12 @@ public class DogController : MonoBehaviour
 
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+            Debug.LogError("AudioSource component not found on " + gameObject.name);
+        }
+
         // Get the Animator component on the same GameObject
         animator = GetComponent<Animator>();
         if (animator == null)
@@ -79,6 +87,12 @@ public class DogController : MonoBehaviour
         currentState = newState;
         Vector3 destination;
 
+        // Stop any currently playing sound
+        if (audioSource != null && audioSource.isPlaying)
+        {
+            audioSource.Stop();
+        }
+
         switch (newState)
         {
             case DogState.Idle:
@@ -115,7 +129,11 @@ public class DogController : MonoBehaviour
                 agent.isStopped = true;  // Stop movement
                 animator.SetInteger("AnimationID", 6);
 
-                // Optionally play a barking sound here
+                // Play the barking sound
+                if (audioSource != null && !audioSource.isPlaying)
+                {
+                    audioSource.Play();
+                }
                 break;
 
             case DogState.Sitting:
