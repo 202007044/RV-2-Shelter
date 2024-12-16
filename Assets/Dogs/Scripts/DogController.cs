@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -17,6 +18,7 @@ public class DogController : MonoBehaviour
     public GameObject player;
 
     private GameObject toy;
+    private GameObject bowl;
 
     public float walkingSpeed;
     public float walkingAcceleration;
@@ -37,6 +39,7 @@ public class DogController : MonoBehaviour
         Sitting,
         Eating,
         Catching,
+        GettingFood,
         Returning
     }
 
@@ -64,8 +67,10 @@ public class DogController : MonoBehaviour
 
     void Update()
     {
+
+        print(gameObject.name + ": " + currentState);
         stateTimer -= Time.deltaTime;
-        if (stateTimer <= 0f && currentState != DogState.Walking && currentState != DogState.Running && currentState != DogState.Catching && currentState != DogState.Returning)
+        if (stateTimer <= 0f && currentState != DogState.Walking && currentState != DogState.Running && currentState != DogState.Catching && currentState != DogState.Returning && currentState != DogState.GettingFood && currentState != DogState.Eating)
         {
             // Randomly pick the next state
             DogState nextState = (DogState)Random.Range(1, 5);
@@ -96,6 +101,17 @@ public class DogController : MonoBehaviour
             }
             else{
                 agent.SetDestination(toy.transform.position);
+            }
+        }
+        if (currentState == DogState.GettingFood)
+        {
+            if (!agent.pathPending && agent.remainingDistance < 1.5)
+            {
+                Eat(this.bowl);
+            }
+            else
+            {
+                agent.SetDestination(this.bowl.transform.position);
             }
         }
         if (currentState == DogState.Returning){
@@ -157,7 +173,14 @@ public class DogController : MonoBehaviour
                 agent.acceleration = runningAcceleration; // Adjust acceleration for running
                 animator.SetInteger("AnimationID", 4);
                 break;
-            
+
+            case DogState.GettingFood:
+                agent.isStopped = false;
+                agent.speed = runningSpeed; // Adjust speed for running
+                agent.acceleration = runningAcceleration; // Adjust acceleration for running
+                animator.SetInteger("AnimationID", 4);
+                break;
+
             case DogState.Returning:
                 agent.isStopped = false;
                 agent.speed = walkingSpeed; // Adjust speed for walking
@@ -193,7 +216,7 @@ public class DogController : MonoBehaviour
         ChangeState(DogState.Catching);
         this.toy = toy;
         agent.SetDestination(this.toy.transform.position);
-        print( gameObject.name + " is catching the toy");
+        print(gameObject.name + " is catching the toy");
     }
 
     public void ReturnToy()
@@ -201,6 +224,33 @@ public class DogController : MonoBehaviour
         ChangeState(DogState.Returning);
         agent.SetDestination(player.transform.position);
         print(gameObject.name +" is returning the toy");
+    }
+
+    public void GoEat(GameObject bowl)
+    {
+        ChangeState(DogState.GettingFood);
+        this.bowl = bowl;
+        agent.SetDestination(this.bowl.transform.position);
+        print(gameObject.name + " is going to eat");
+    }
+
+    public void Eat(GameObject bowl)
+    {
+        StartCoroutine(EatRoutine(bowl));
+    }
+
+    private IEnumerator EatRoutine(GameObject bowl)
+    {
+        // Transition to Eating state
+        ChangeState(DogState.Eating);
+        print(gameObject.name + " is eating");
+
+        yield return new WaitForSeconds(5f);
+
+        bowl.GetComponent<food_bowl>().empty_bowl();
+        print(gameObject.name + " finished eating");
+
+        ChangeState(DogState.Idle);
     }
 
     Vector3 GetRandomPointInArea()
