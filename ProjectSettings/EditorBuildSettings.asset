@@ -8,7 +8,12 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
+    path: Assets/Scenes/PetScene.unity
+    guid: 35d3f4cda3dff904dab12119dac9db1a
   m_configObjects:
+    Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 7a650fc7e5664cd4c8fb069ee0a6ebc1,
+      type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 8937f08d780e26149a2387307cbead04,
       type: 2}
     com.unity.xr.openxr.settings4: {fileID: 11400000, guid: 41ac1cadcfc552845adc42e6bc1d4dd4,

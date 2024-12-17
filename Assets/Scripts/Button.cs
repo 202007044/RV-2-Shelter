@@ -36,7 +36,7 @@ public class GrabbableButton : XRGrabInteractable
             Debug.Log("Exit button pressed");
             //quit the game
             Application.Quit();
-            UnityEditor.EditorApplication.isPlaying = false;
+            //UnityEditor.EditorApplication.isPlaying = false;
 
         }
         

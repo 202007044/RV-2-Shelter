@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UIElements;
 
 public class DogController : MonoBehaviour
 {
@@ -15,6 +16,8 @@ public class DogController : MonoBehaviour
     public float walkAreaRadius = 30f; // Radius of walkable area
     public GameObject internalToy;
     public GameObject player;
+
+    public BoxCollider dogCollider;
 
     private GameObject toy;
 
@@ -37,7 +40,9 @@ public class DogController : MonoBehaviour
         Sitting,
         Eating,
         Catching,
-        Returning
+        Returning,
+
+        WigglingTail
     }
 
     void Start()
@@ -173,12 +178,15 @@ public class DogController : MonoBehaviour
             case DogState.Barking:
                 agent.isStopped = true;  // Stop movement
                 animator.SetInteger("AnimationID", 6);
-
                 // Play the barking sound
                 if (audioSource != null && !audioSource.isPlaying)
                 {
                     audioSource.Play();
                 }
+                break;
+            case DogState.WigglingTail:
+                agent.isStopped = true;  // Stop movement
+                animator.SetInteger("AnimationID", 1);
                 break;
 
             case DogState.Sitting:
@@ -238,4 +246,18 @@ public class DogController : MonoBehaviour
         // Set a random value for the state timer
         stateTimer = Random.Range(minStateInterval, maxStateInterval);
     }
+    void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.CompareTag("Controller"))
+        {
+            print(gameObject.name +"collided with " + other.gameObject.name);
+            ChangeState(DogState.WigglingTail);
+        }
+    }
+
+    public void Bath()
+    {
+        gameObject.SetActive(false);
+    }
+    
 }
