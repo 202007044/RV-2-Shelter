@@ -75,7 +75,7 @@ public class DogController : MonoBehaviour
 
         print(gameObject.name + ": " + currentState);
         stateTimer -= Time.deltaTime;
-        if (stateTimer <= 0f && currentState != DogState.Walking && currentState != DogState.Running && currentState != DogState.Catching && currentState != DogState.Returning && currentState != DogState.GettingFood && currentState != DogState.Eating)
+        if (stateTimer <= 0f && currentState != DogState.Catching && currentState != DogState.Returning && currentState != DogState.GettingFood && currentState != DogState.Eating)
         {
             // Randomly pick the next state
             DogState nextState = (DogState)Random.Range(1, 5);
