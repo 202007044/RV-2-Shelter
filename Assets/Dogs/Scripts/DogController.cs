@@ -31,7 +31,8 @@ public class DogController : MonoBehaviour
     private float stateTimer;          // Timer to track when to change state
     private DogState currentState;     // Current behavior state
 
-    private AudioSource audioSource;
+    private AudioSource barkAudio;
+    private AudioSource eatAudio;
 
     private enum DogState
     {
@@ -50,11 +51,10 @@ public class DogController : MonoBehaviour
 
     void Start()
     {
-        audioSource = GetComponent<AudioSource>();
-        if (audioSource == null)
-        {
-            Debug.LogError("AudioSource component not found on " + gameObject.name);
-        }
+        // Get the AudioSource components attached to the GameObject
+        AudioSource[] audioSources = GetComponents<AudioSource>();
+        barkAudio = audioSources[0]; // First AudioSource
+        eatAudio = audioSources[1]; // Second AudioSource
 
         // Get the Animator component on the same GameObject
         animator = GetComponent<Animator>();
@@ -140,9 +140,14 @@ public class DogController : MonoBehaviour
         Vector3 destination;
 
         // Stop any currently playing sound
-        if (audioSource != null && audioSource.isPlaying)
+        if (barkAudio != null && barkAudio.isPlaying)
         {
-            audioSource.Stop();
+            barkAudio.Stop();
+        }
+
+        if (eatAudio != null && eatAudio.isPlaying)
+        {
+            eatAudio.Stop();
         }
 
         switch (newState)
@@ -196,15 +201,20 @@ public class DogController : MonoBehaviour
             case DogState.Eating:
                 agent.isStopped = true;  // Stop movement
                 animator.SetInteger("AnimationID", 5);
+                // Play the eating sound
+                if (eatAudio != null && !eatAudio.isPlaying)
+                {
+                    eatAudio.Play();
+                }
                 break;
 
             case DogState.Barking:
                 agent.isStopped = true;  // Stop movement
                 animator.SetInteger("AnimationID", 6);
                 // Play the barking sound
-                if (audioSource != null && !audioSource.isPlaying)
+                if (barkAudio != null && !barkAudio.isPlaying)
                 {
-                    audioSource.Play();
+                    barkAudio.Play();
                 }
                 break;
             case DogState.WigglingTail:
