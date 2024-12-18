@@ -20,7 +20,7 @@ public class CarKey : XRSimpleInteractable
         base.OnSelectEntered(args);
         // animation trigger to rotate the key
         animator.SetTrigger("rotate");
-        StartCoroutine(TurnCarOnAfterDelay(0.5f));
+        StartCoroutine(TurnCarOnAfterDelay(0.6f));
     }
 
     protected override void OnSelectExited(SelectExitEventArgs args)
@@ -31,7 +31,9 @@ public class CarKey : XRSimpleInteractable
 
     private IEnumerator TurnCarOnAfterDelay(float delay)
     {
+        car.TurnOnCar();
         yield return new WaitForSeconds(delay);
         car.isOn = true;
+
     }
 }

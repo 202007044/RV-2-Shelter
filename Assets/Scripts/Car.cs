@@ -7,6 +7,9 @@ public class Car : MonoBehaviour
     public bool isOn = false;
     public bool useCar = true;
     public GameObject player;
+    
+    public AudioSource carSound;
+    public GameObject menu;
     public List<Transform> points;
     public float maxSpeed = 10f;
     public float acceleration = 0.1f;
@@ -24,8 +27,20 @@ public class Car : MonoBehaviour
     {
         if (points == null || points.Count == 0)
         {
-            Debug.LogError("No points assigned for the car to follow.");
+            //debug.LogError("No points assigned for the car to follow.");
         }
+        if(useCar)
+        {
+            player.transform.position = new Vector3(transform.position.x+1, transform.position.y - 3, transform.position.z + 3f);
+            // make player face forward of the car
+            player.transform.rotation = Quaternion.LookRotation(transform.forward);
+
+
+
+        }
+
+        
+
     }
 
     // Update is called once per frame
@@ -33,23 +48,28 @@ public class Car : MonoBehaviour
     {
         if(!isStarted && useCar)
         {
-            player.transform.position = new Vector3(transform.position.x, transform.position.y - 3, transform.position.z + 1.7f);
+            player.transform.position = new Vector3(transform.position.x+1, transform.position.y - 3, transform.position.z + 3f);
         }
         if (isOn && points != null && points.Count > 0)
         {
             isStarted = true;
+            menu.SetActive(false);
             MoveAlongPoints();
-            player.transform.position = new Vector3(transform.position.x, transform.position.y - 3, transform.position.z + 1.7f);
+            player.transform.position = new Vector3(transform.position.x+1, transform.position.y - 3, transform.position.z + 3f);
             if (currentSpeed == 0 && isEnded)
             {
                 player.transform.position = new Vector3(player.transform.position.x,0, player.transform.position.z+4.0f);
                 isOn = false;
+                carSound.Stop();
             }
         }
         //if current speed is 0, move the player to the left of the car
         
     }
-
+    public void TurnOnCar()
+    {
+        carSound.Play();
+    }
     private void MoveAlongPoints()
     {
         Transform targetPoint = points[currentPointIndex];

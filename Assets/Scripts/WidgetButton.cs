@@ -40,7 +40,7 @@ public class WidgetButton : XRSimpleInteractable
         dogs.Add(corgi);
         dogs.Add(chihuahua);
         text.text = GetActiveDogCount().ToString();
-        print("Dogs: " + dogs.Count);
+        //print("Dogs: " + dogs.Count);
     }
 
     protected int GetActiveDogCount()

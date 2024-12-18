@@ -92,7 +92,7 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.DeviceSimulator
                 var simulatedExpression = simulator.simulatedHandExpressions[index];
                 if (index >= m_Expressions.Count)
                 {
-                    Debug.LogWarning("The Device Simulator has more expressions than the UI can display.", this);
+                    //debug.LogWarning("The Device Simulator has more expressions than the UI can display.", this);
                 }
                 else
                 {
@@ -141,11 +141,11 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.DeviceSimulator
             var index = simulator.simulatedHandExpressions.IndexOf(simulatedExpression);
             if (index >= m_Expressions.Count)
             {
-                Debug.LogWarning("The Device Simulator has more expressions than the UI can display.", this);
+                //debug.LogWarning("The Device Simulator has more expressions than the UI can display.", this);
             }
             else if (index < 0)
             {
-                Debug.LogError($"The Device Simulator tried to toggle {simulatedExpression.name} but it was not found in the list of simulated hand expressions, the UI can not be updated.", this);
+                //debug.LogError($"The Device Simulator tried to toggle {simulatedExpression.name} but it was not found in the list of simulated hand expressions, the UI can not be updated.", this);
             }
             else
             {

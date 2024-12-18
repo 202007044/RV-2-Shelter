@@ -32,7 +32,7 @@ public class Daylight : MonoBehaviour
         directionalLight.intensity = 0.0f;
         RenderSettings.skybox = nightMaterial;
         isNight = true;
-        print("Night");
+        //print("Night");
     }
 
     public void turnDay()
@@ -41,7 +41,7 @@ public class Daylight : MonoBehaviour
         RenderSettings.skybox = dayMaterial;
 
         isNight = false;
-        print("Day");
+        //print("Day");
     }
 
 }

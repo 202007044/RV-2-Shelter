@@ -36,14 +36,14 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets
             m_AffordanceStateProvider = GetComponent<XRInteractableAffordanceStateProvider>();
             if (m_AffordanceStateProvider == null)
             {
-                Debug.LogError($"Missing {nameof(XRInteractableAffordanceStateProvider)} on {gameObject.name}.", this);
+                //debug.LogError($"Missing {nameof(XRInteractableAffordanceStateProvider)} on {gameObject.name}.", this);
                 enabled = false;
                 return;
             }
 
             if (m_ContainingTeleportVolume == null)
             {
-                Debug.LogError($"Missing {nameof(TeleportationMultiAnchorVolume)} reference on {gameObject.name}.", this);
+                //debug.LogError($"Missing {nameof(TeleportationMultiAnchorVolume)} reference on {gameObject.name}.", this);
                 enabled = false;
                 return;
             }
@@ -55,7 +55,7 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets
 
             if (m_Interactable == null)
             {
-                Debug.LogError($"Interactable source must be an {nameof(IXRInteractable)}.", this);
+                //debug.LogError($"Interactable source must be an {nameof(IXRInteractable)}.", this);
                 enabled = false;
                 return;
             }

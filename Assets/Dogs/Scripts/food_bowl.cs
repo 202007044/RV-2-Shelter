@@ -13,7 +13,7 @@ public class FoodBowl : MonoBehaviour
     {
         if (other.gameObject.CompareTag("racao"))
         {
-            print("Collide with racao");
+            //print("Collide with racao");
             fill_bowl();
         }
     }

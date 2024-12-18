@@ -31,7 +31,7 @@ public class DogToy : XRGrabInteractable
     {
         if (dogs.Length == 0)
         {
-            Debug.Log("No dogs found.");
+            //debug.Log("No dogs found.");
             return;
         }
 

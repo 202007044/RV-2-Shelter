@@ -29,11 +29,11 @@ public class GrabbableButton : XRGrabInteractable
         }
         else if(buttonType == "settings")
         {
-            Debug.Log("Settings button pressed");
+            //debug.Log("Settings button pressed");
         }
         else if(buttonType == "exit")
         {
-            Debug.Log("Exit button pressed");
+            //debug.Log("Exit button pressed");
             //quit the game
             Application.Quit();
             //UnityEditor.EditorApplication.isPlaying = false;

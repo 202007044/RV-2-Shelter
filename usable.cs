@@ -56,7 +56,7 @@ public class usable : MonoBehaviour
         bool hasHit = Physics.Raycast(source.position, source.forward, out hit, distance, layerMask);
         if (hasHit)
         {
-            Debug.Log($"Hit object: {hit.transform.name}");
+            //debug.Log($"Hit object: {hit.transform.name}");
             // SendMessage to the hit object
             hit.transform.gameObject.SendMessage("fill_bowl", SendMessageOptions.DontRequireReceiver);
         }

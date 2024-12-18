@@ -60,7 +60,7 @@ public class DogController : MonoBehaviour
         animator = GetComponent<Animator>();
         if (animator == null)
         {
-            Debug.LogError("Animator component not found on " + gameObject.name);
+            //debug.LogError("Animator component not found on " + gameObject.name);
         }
 
         internalToy.SetActive(false);
@@ -73,13 +73,13 @@ public class DogController : MonoBehaviour
     void Update()
     {
 
-        print(gameObject.name + ": " + currentState);
+        //print(gameObject.name + ": " + currentState);
         stateTimer -= Time.deltaTime;
         if (stateTimer <= 0f && currentState != DogState.Catching && currentState != DogState.Returning && currentState != DogState.GettingFood && currentState != DogState.Eating)
         {
             // Randomly pick the next state
             DogState nextState = (DogState)Random.Range(1, 5);
-            //Debug.Log("Dog State: " + gameObject.name + " " + nextState);
+            ////debug.Log("Dog State: " + gameObject.name + " " + nextState);
             ChangeState(nextState);
 
             // Set a new random interval for the next state change
@@ -91,7 +91,7 @@ public class DogController : MonoBehaviour
         {
             if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
             {
-                //Debug.Log(gameObject.name + " arrived at position: Stop walking");
+                ////debug.Log(gameObject.name + " arrived at position: Stop walking");
 
                 // Stop walking and switch to idle
                 ChangeState(DogState.Idle);
@@ -120,13 +120,13 @@ public class DogController : MonoBehaviour
             }
         }
         if (currentState == DogState.Returning){
-            print(agent.remainingDistance);
+            //print(agent.remainingDistance);
             if(!agent.pathPending && agent.remainingDistance<6.0){
                 internalToy.SetActive(false);
                 this.toy.SetActive(true);
                 toy.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 1, gameObject.transform.position.z);
                 ChangeState(DogState.Idle);
-                print("Returned the toy");
+                //print("Returned the toy");
             }
             else{
                 agent.SetDestination(player.transform.position);
@@ -163,7 +163,7 @@ public class DogController : MonoBehaviour
                 agent.acceleration = walkingAcceleration; // Adjust acceleration for walking
                 animator.SetInteger("AnimationID", 2);
                 destination = GetRandomPointOnNavMesh();
-                //Debug.Log("Random Destination: " + destination);
+                ////debug.Log("Random Destination: " + destination);
                 agent.SetDestination(destination);
                 break;
 
@@ -173,7 +173,7 @@ public class DogController : MonoBehaviour
                 agent.acceleration = runningAcceleration; // Adjust acceleration for running
                 animator.SetInteger("AnimationID", 4);
                 destination = GetRandomPointOnNavMesh();
-                //Debug.Log("Random Destination: " + destination);
+                ////debug.Log("Random Destination: " + destination);
                 agent.SetDestination(destination);
                 break;
 
@@ -227,6 +227,11 @@ public class DogController : MonoBehaviour
                 animator.SetInteger("AnimationID", 7);
                 break;
         }
+        if(agent.isStopped){
+            agent.velocity = Vector3.zero;
+            agent.speed = 0;
+            agent.acceleration = 0;
+        }
     }
 
     public void CatchToy(GameObject toy)
@@ -234,14 +239,14 @@ public class DogController : MonoBehaviour
         ChangeState(DogState.Catching);
         this.toy = toy;
         agent.SetDestination(this.toy.transform.position);
-        print(gameObject.name + " is catching the toy");
+        //print(gameObject.name + " is catching the toy");
     }
 
     public void ReturnToy()
     {
         ChangeState(DogState.Returning);
         agent.SetDestination(player.transform.position);
-        print(gameObject.name +" is returning the toy");
+        //print(gameObject.name +" is returning the toy");
     }
 
     public void GoEat(GameObject bowl)
@@ -249,7 +254,7 @@ public class DogController : MonoBehaviour
         ChangeState(DogState.GettingFood);
         this.bowl = bowl;
         agent.SetDestination(this.bowl.transform.position);
-        print(gameObject.name + " is going to eat");
+        //print(gameObject.name + " is going to eat");
     }
 
     public void Eat(GameObject bowl)
@@ -261,12 +266,12 @@ public class DogController : MonoBehaviour
     {
         // Transition to Eating state
         ChangeState(DogState.Eating);
-        print(gameObject.name + " is eating");
+        //print(gameObject.name + " is eating");
 
         yield return new WaitForSeconds(5f);
 
         bowl.GetComponent<FoodBowl>().empty_bowl();
-        print(gameObject.name + " finished eating");
+        //print(gameObject.name + " finished eating");
 
         ChangeState(DogState.Idle);
     }
@@ -310,7 +315,7 @@ public class DogController : MonoBehaviour
     {
         if(other.gameObject.CompareTag("Controller"))
         {
-            print(gameObject.name +"collided with " + other.gameObject.name);
+            //print(gameObject.name +"collided with " + other.gameObject.name);
             ChangeState(DogState.WigglingTail);
         }
     }

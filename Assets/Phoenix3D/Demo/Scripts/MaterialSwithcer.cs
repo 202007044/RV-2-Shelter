@@ -37,7 +37,7 @@ public class MaterialSwithcer : MonoBehaviour
         }
 
         materialName.text = materials[currentIndex].name;
-        Debug.Log(materials[currentIndex].name);
+        //debug.Log(materials[currentIndex].name);
 
     }
 }
